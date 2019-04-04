@@ -15,7 +15,16 @@ def factorial(n):
 
 def factorial_iterative(n):
     from functools import reduce
+    # here we are using reduce to apply the function of
+    # multiplying each item in a list to the list returned
+    # by range(1, n+1), 1 is the starting value
     return reduce(lambda x, y: x * y, range(1, n+1), 1)
+
+    # alternatively
+    # product = 1
+    # for num in range(1, n+1):
+    #     product *= num
+    # return product
 
 
 def factorial_recursive(n):
