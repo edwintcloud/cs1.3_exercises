@@ -9,6 +9,7 @@ import string
 # string.ascii_letters is ascii_lowercase + ascii_uppercase
 # string.printable is digits + ascii_letters + punctuation + whitespace
 
+
 def decode(digits, base):
     """Decode given digits in given base to number in base 10.
     digits: str -- string representation of number (in given base)
@@ -16,20 +17,21 @@ def decode(digits, base):
     return: int -- integer representation of number (in base 10)"""
     # Handle up to base 36 [0-9a-z]
     assert 2 <= base <= 36, 'base is out of range: {}'.format(base)
-    
+
     # map chars [0-9a-z] to numbers [0-36]
-    num_map = {char: num for num, char in enumerate(string.digits + string.ascii_lowercase)}
+    num_map = {char: num for num, char in enumerate(
+        string.digits + string.ascii_lowercase)}
 
     # create a variable to hold result and multiplier
     result, multiplier = 0, 1
 
-    for digit in digits[::-1]: 
+    # ord(digit) -87
+    for digit in digits[::-1]:
         result += num_map[digit.lower()] * multiplier
-        multiplier *= base # representative of base ^ ith power
+        multiplier *= base  # representative of base ^ ith power
 
     # return the result
     return result
-        
 
 
 def encode(number, base):
@@ -41,9 +43,10 @@ def encode(number, base):
     assert 2 <= base <= 36, 'base is out of range: {}'.format(base)
     # Handle unsigned numbers only for now
     assert number >= 0, 'number is negative: {}'.format(number)
-    
+
     # map numbers [0-36] to chars [0-9a-z]
-    char_map = {num: char for num, char in enumerate(string.digits + string.ascii_lowercase)}
+    char_map = {num: char for num, char in enumerate(
+        string.digits + string.ascii_lowercase)}
 
     # create variable to hold resulting sequence
     result = ""
@@ -53,10 +56,11 @@ def encode(number, base):
 
     while quotient > 0:
         quotient, remainder = divmod(quotient, base)
-        result=char_map[int(remainder)] + result
+        result = char_map[int(remainder)] + result
 
     # return result
     return result
+
 
 def convert(digits, base1, base2):
     """Convert given digits in base1 to digits in base2.
@@ -82,7 +86,8 @@ def main():
         base2 = int(args[2])
         # Convert given digits between bases
         result = convert(digits, base1, base2)
-        print('{} in base {} is {} in base {}'.format(digits, base1, result, base2))
+        print('{} in base {} is {} in base {}'.format(
+            digits, base1, result, base2))
     else:
         print('Usage: {} digits base1 base2'.format(sys.argv[0]))
         print('Converts digits from base1 to base2')
