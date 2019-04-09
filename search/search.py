@@ -18,10 +18,10 @@ def linear_search_iterative(array, item):
 
 
 def linear_search_recursive(array, item, index=0):
-    if array[index] == item:
-        return index
-    elif index >= len(array)-1:
+    if index >= len(array)-1:
         return None
+    elif array[index] == item:
+        return index
     return linear_search_recursive(array, item, index+1)
 
 
