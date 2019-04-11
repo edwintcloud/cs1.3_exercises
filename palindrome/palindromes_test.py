@@ -81,6 +81,13 @@ class TestPalindromes(unittest.TestCase):
         assert is_palindrome('AAAAZAAA') is False
         assert is_palindrome('AAAAAAAZ') is False
 
+    # def test_recursive_overflow(self):
+    #     import sys
+    #     sys.setrecursionlimit(9999)
+    #     with open('test.txt') as file:
+    #         data = file.readline().rstrip().lstrip()
+    #     assert is_palindrome(data) is True
+
 
 if __name__ == '__main__':
     unittest.main()

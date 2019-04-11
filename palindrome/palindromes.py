@@ -16,6 +16,23 @@ def is_palindrome(text):
     assert isinstance(text, str), 'input is not a string: {}'.format(text)
     # return is_palindrome_iterative(text)
     return is_palindrome_recursive(text)
+    # return is_palidrome_superman(text)
+
+
+# def is_palidrome_superman(text):
+#     text = text.translate(str.maketrans('', '', SKIP_CHARS))
+#     text = text.lower()
+#     unique_count = len(set(text))
+#     length = len(text)
+#     print(text)
+#     print(unique_count)
+#     print(len(text))
+#     if len
+#     if len(text) % 2 == 0:
+#         return unique_count == len(text) // 2
+#     else:
+#         if
+#         return unique_count == (len(text)-1) // 2
 
 
 def is_palindrome_iterative(text):

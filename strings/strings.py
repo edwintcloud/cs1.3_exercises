@@ -8,7 +8,7 @@ def contains(text, pattern):
 
     # if index is found in text, return true
     # otherwise return false
-    return True if find_index(text, pattern) is not None else False
+    return find_index(text, pattern) is not None
 
 
 def find_index(text, pattern):
@@ -26,6 +26,8 @@ def find_index(text, pattern):
 
     # return None if index was not found
     return None
+
+# string slicing is order n and very slow - avoid
 
 
 def find_all_indexes(text, pattern):
