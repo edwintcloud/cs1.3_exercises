@@ -93,13 +93,15 @@ class LinkedList(object):
         node = self.head
         cur_index = 0
         # loop through linked list, each time incrementing index
-        # once index matches, set node to new node with item
-        # and set node.next to node
+        # once index matches,
         while node is not None:
-            if cur_index == index:
-                cur_node = node
-                node = Node(item)
-                node.next = cur_node
+            # set node to new node with item and set node.next to node
+            if cur_index == index-1:
+                prev_node = node
+                cur_node = node.next
+                new_node = Node(item)
+                new_node.next = cur_node
+                prev_node.next = new_node
                 # increment size for a node insertion
                 self.size += 1
                 return
