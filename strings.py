@@ -2,7 +2,9 @@
 
 
 def contains(text, pattern):
-    """Return a boolean indicating whether pattern occurs in text."""
+    """Return a boolean indicating whether pattern occurs in text.
+    Runtime Complexity: θ(n) Space Complexity: θ(1)
+    """
     assert isinstance(text, str), 'text is not a string: {}'.format(text)
     assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
 
@@ -11,44 +13,72 @@ def contains(text, pattern):
     return find_index(text, pattern) is not None
 
 
-def find_index(text, pattern):
+def find_index(text, pattern, start=0):
     """Return the starting index of the first occurrence of pattern in text,
-    or None if not found."""
+    or None if not found.
+    Runtime Complexity: θ(n) Space Complexity: θ(1)"""
     assert isinstance(text, str), 'text is not a string: {}'.format(text)
     assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
 
+    # we need two variables to keep track of what
+    # index we are at in the pattern and how many
+    # characters of pattern have been matched consecutively
+    patternIndex = 0
+    matchedCount = 0
+
     # loop through characters in text
-    # each time checking if the window of characters
-    # of equal length to pattern is equal to pattern
-    for index in range(len(text)):
-        if text[index:index+len(pattern)] == pattern:
-            return index
+    for textIndex in range(start, len(text)):
+
+        # handle the special case of an empty string pattern
+        if len(pattern) == 0:
+            return textIndex
+
+        # increment pattern count and index if current character
+        # in pattern matches current character in text
+        if text[textIndex] == pattern[patternIndex]:
+            matchedCount += 1
+            patternIndex += 1
+
+        # if there is overlap, restart the pattern count and index at 1
+        elif text[textIndex] == pattern[0]:
+            patternIndex = 1
+            matchedCount = 1
+
+        # otherwise restart the pattern count and index at 0
+        else:
+            patternIndex = 0
+            matchedCount = 0
+
+        # once the pattern count becomes equal to length of pattern
+        # we have a match - return the starting index
+        if matchedCount >= len(pattern):
+            return textIndex - matchedCount+1
 
     # return None if index was not found
     return None
 
-# string slicing is order n and very slow - avoid
-
 
 def find_all_indexes(text, pattern):
     """Return a list of starting indexes of all occurrences of pattern in text,
-    or an empty list if not found."""
+    or an empty list if not found.
+    Runtime Complexity: θ(n) Space Complexity: θ(1)"""
     assert isinstance(text, str), 'text is not a string: {}'.format(text)
     assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
 
     # result list for starting indexes of windows that
     # match the pattern
-    result = []
+    resultingIndices = []
 
-    # loop through characters in text
-    # each time checking if the window of characters
-    # of equal length to pattern is equal to pattern
-    for index in range(len(text)):
-        if text[index:index+len(pattern)] == pattern:
-            result.append(index)
+    resultingIndex = 0
+    # loop until we get None for the resultingIndex
+    while resultingIndex is not None:
+        resultingIndex = find_index(text, pattern, resultingIndex)
+        if resultingIndex is not None:
+            resultingIndices.append(resultingIndex)
+            resultingIndex += 1
 
-    # return resulting list of indexes
-    return result
+    # return resulting list of indices
+    return resultingIndices
 
 
 def test_string_algorithms(text, pattern):

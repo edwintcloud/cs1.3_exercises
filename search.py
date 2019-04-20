@@ -18,7 +18,7 @@ def linear_search_iterative(array, item):
 
 
 def linear_search_recursive(array, item, index=0):
-    if index >= len(array)-1:
+    if index >= len(array):
         return None
     elif array[index] == item:
         return index
