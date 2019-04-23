@@ -28,7 +28,7 @@ class Set(object):
         """Return True if the element is contained in the set, or return
         False otherwise.
         Runtime: O(1) Space: O(1)"""
-        return self.data.contains(elements)
+        return self.data.contains(element)
 
     def add(self, element):
         """Add an element to the set.
@@ -38,7 +38,7 @@ class Set(object):
     def remove(self, element):
         """Remove an item from the set.
         Runtime: O(1) Space: O(-1)"""
-        self.data.delete(element)
+        self.data.delete(element)  # raise a KeyError if element does not exist
 
     def union(self, other_set):
         """Return a new set containing all elements from the first and second set.
@@ -61,7 +61,7 @@ class Set(object):
         """Return True if the second set is a subset of the first set, otherwise
         return False.
         Runtime: O(n) Space: O(1)"""
-        return self.difference(other_set).data.size == 0
+        return other_set.difference(self).data.size == 0
 
 
 def test_set():
