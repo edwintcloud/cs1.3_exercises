@@ -11,4 +11,4 @@ def hash_str(string):
 # test
 result = hash_str("test")
 print(result)
-print(hash("test"))
+print(hash_str("estt"))

@@ -37,7 +37,7 @@ class HashTable(object):
     def load_factor(self):
         """Return the load factor, the ratio of number of entries to buckets.
         Best and worst case running time: ??? under what conditions? [TODO]"""
-        return self.size / len(self.buckets)
+        return float(self.size) / len(self.buckets)
 
     def keys(self):
         """Return a list of all keys in this hash table.
@@ -72,12 +72,13 @@ class HashTable(object):
         """Return the number of key-value entries by traversing its buckets.
         Best and worst case running time: ??? under what conditions? [TODO]"""
         # Count number of key-value entries in each of the buckets
-        item_count = 0
-        for bucket in self.buckets:
-            item_count += bucket.length()
-        return item_count
-        # Equivalent to this list comprehension:
-        return sum(bucket.length() for bucket in self.buckets)
+        # item_count = 0
+        # for bucket in self.buckets:
+        #     item_count += bucket.length()
+        # return item_count
+        # # Equivalent to this list comprehension:
+        # return sum(bucket.length() for bucket in self.buckets)
+        return self.size
 
     def contains(self, key):
         """Return True if this hash table contains the given key, or False.
@@ -165,15 +166,12 @@ class HashTable(object):
         # Get a list to temporarily hold all current key-value entries
         items = self.items()
 
-        # reset size
-        self.size = 0
-
-        # Create a new list of new_size total empty linked list buckets
-        self.buckets = [LinkedList() for i in range(new_size)]
+        # reinitialize hashtable with new size
+        self.__init__(new_size)
 
         # Insert each key-value entry into the new list of buckets
-        for item in items:
-            self.set(item[0], item[1])
+        for key, value in items:
+            self.set(key, value)
 
 
 def test_hash_table():
