@@ -42,7 +42,7 @@ class Set(object):
 
     def union(self, other_set):
         """Return a new set containing all elements from the first and second set.
-        Runtime: O(n) Space: O(n)"""
+        Runtime: O(n + k) Space: O(n + k)"""
         return Set(self.data.keys() + other_set.data.keys())
 
     def intersection(self, other_set):
