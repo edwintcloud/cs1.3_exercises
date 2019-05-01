@@ -48,7 +48,9 @@ class Set(object):
     def intersection(self, other_set):
         """Return a new set containing elements that are located in both the first
         and second set.
-        Runtime: O(n) Space: O(n)"""
+        Runtime: O(min(n, m)) Space: O(n)"""
+        if self.size() < other_set.size():
+            return Set([key for key in other_set.data.keys() if self.data.contains(key)])
         return Set([key for key in self.data.keys() if other_set.data.contains(key)])
 
     def difference(self, other_set):
